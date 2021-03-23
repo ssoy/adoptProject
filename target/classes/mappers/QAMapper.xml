@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.adopt.QAMapper">
+
+
+
+	<insert id="insert">
+		insert into QA(num,subject, choose,userid,content)
+		values(#{num}, #{subject}, #{choose}, #{userid},#{content})
+	</insert>
+	
+	<update id="update">
+		update QA
+		set subject = #{subject},
+			choose = #{choose},
+			userid = #{userid},
+			content = #{content},
+		where num = #{num}
+	</update>
+	
+	<delete id="delete">
+		delete from QA where num = #{num}
+	</delete>
+	
+	<select id="selectOne" resultType="QADTO">
+		select * from QA where num = #{num}
+	</select>
+	
+	<!-- 검색key와 value로 조회 -->
+	<select id="selectList" resultType="QADTO">
+		select * from QA
+		where UPPER(${key}) like '%' || UPPER(#{value}) || '%'
+	</select>
+
+</mapper>
