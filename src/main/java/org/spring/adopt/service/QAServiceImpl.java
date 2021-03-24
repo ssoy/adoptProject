@@ -31,13 +31,13 @@ public class QAServiceImpl implements QAService{
 	}
 
 	@Override
-	public int delete(int num) {
-		return qadao.delete(num);
+	public int delete(int qnum) {
+		return qadao.delete(qnum);
 	}
 
 	@Override
-	public QADTO selectOne(int num) {
-		return qadao.selectOne(num);
+	public QADTO selectOne(int qnum) {
+		return qadao.selectOne(qnum);
 	}
 
 	@Override

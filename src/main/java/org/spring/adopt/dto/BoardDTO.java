@@ -6,32 +6,25 @@ public class BoardDTO {
 	private String subject;
 	private String content;
 	private int readcount;
+	private int likecnt;
+	private int dislikecnt;
 	private String ip;
 	private String regdate;
 	private String modifydate;
 	public BoardDTO() {
 		super();
 	}
-	public BoardDTO(int bnum, String userid, String subject, String content, int readcount, String ip, String regdate,
-			String modifydate) {
+	
+	
+	public BoardDTO(String userid, String subject, String content, String ip) {
 		super();
-		this.bnum = bnum;
 		this.userid = userid;
 		this.subject = subject;
 		this.content = content;
-		this.readcount = readcount;
 		this.ip = ip;
-		this.regdate = regdate;
-		this.modifydate = modifydate;
 	}
-	public BoardDTO(String userid, String subject, String content, int readcount, String regdate) {
-		super();
-		this.userid = userid;
-		this.subject = subject;
-		this.content = content;
-		this.readcount = readcount;
-		this.regdate = regdate;
-	}
+
+
 	public int getBnum() {
 		return bnum;
 	}
@@ -62,6 +55,18 @@ public class BoardDTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
+	public int getLikecnt() {
+		return likecnt;
+	}
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
+	}
+	public int getDislikecnt() {
+		return dislikecnt;
+	}
+	public void setDislikecnt(int dislikecnt) {
+		this.dislikecnt = dislikecnt;
+	}
 	public String getIp() {
 		return ip;
 	}
@@ -82,9 +87,10 @@ public class BoardDTO {
 	}
 	@Override
 	public String toString() {
+		
 		return "BoardDTO [bnum=" + bnum + ", userid=" + userid + ", subject=" + subject + ", content=" + content
-				+ ", readcount=" + readcount + ", ip=" + ip + ", regdate=" + regdate + ", modifydate=" + modifydate
-				+ "]";
+				+ ", readcount=" + readcount + ", likecnt=" + likecnt + ", dislikecnt=" + dislikecnt + ", ip=" + ip
+				+ ", regdate=" + regdate + ", modifydate=" + modifydate + "]";
 	}
 	
 	

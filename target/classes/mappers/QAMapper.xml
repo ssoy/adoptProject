@@ -7,25 +7,24 @@
 
 
 	<insert id="insert">
-		insert into QA(num,subject, choose,userid,content)
-		values(#{num}, #{subject}, #{choose}, #{userid},#{content})
+		insert into QA(qnum,userid,qchoose,qsubject,qcontent)
+		values(#{qnum},#{userid},#{qchoose},#{qsubject},#{qcontent})
 	</insert>
 	
 	<update id="update">
 		update QA
-		set subject = #{subject},
-			choose = #{choose},
-			userid = #{userid},
-			content = #{content},
-		where num = #{num}
+		set qchoose = #{qchoose},
+			qsubject = #{qsubject},
+			qcontent = #{qcontent}
+		where qnum = #{qnum}
 	</update>
 	
 	<delete id="delete">
-		delete from QA where num = #{num}
+		delete from QA where qnum = #{qnum}
 	</delete>
 	
 	<select id="selectOne" resultType="QADTO">
-		select * from QA where num = #{num}
+		select * from QA where qnum = #{qnum}
 	</select>
 	
 	<!-- 검색key와 value로 조회 -->

@@ -19,22 +19,22 @@ public class QADAOImpl implements QADAO{
 	
 	@Override
 	public int insert(QADTO qadto) {
-		return session.insert("QAMapper.insert",qadto);
+		return session.insert("org.spring.adopt.QAMapper.insert",qadto);
 	}
 
 	@Override
 	public int update(QADTO qadto) {
-		return session.update("QAMapper.update",qadto);
+		return session.update("org.spring.adopt.QAMapper.update",qadto);
 	}
 
 	@Override
-	public int delete(int num) {
-		return session.delete("QAMapper.delete",num);
+	public int delete(int qnum) {
+		return session.delete("org.spring.adopt.QAMapper.delete",qnum);
 	}
 
 	@Override
-	public QADTO selectOne(int num) {
-		return session.selectOne("QAMapper.selectOne",num);
+	public QADTO selectOne(int qnum) {
+		return session.selectOne("org.spring.adopt.QAMapper.selectOne",qnum);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class QADAOImpl implements QADAO{
 		map.put("key",key);
 		map.put("value",value);
 		
-		return session.selectList("QAMapper.selectList",map);
+		return session.selectList("org.spring.adopt.QAMapper.selectList",map);
 	}
 
 }

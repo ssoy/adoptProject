@@ -1,29 +1,35 @@
 package org.spring.adopt.dto;
 
 public class QADTO {
-	private int num;
+	private int qnum;
+	private String qchoose;
 	private String userid;
-	private String subject;
-	private String content;
-	private int readcount;
+	private String qsubject;
+	private String qcontent;
 	private String regdate;
+	public QADTO(int qnum, String qchoose, String userid, String qsubject, String qcontent, String regdate) {
+		super();
+		this.qnum = qnum;
+		this.qchoose = qchoose;
+		this.userid = userid;
+		this.qsubject = qsubject;
+		this.qcontent = qcontent;
+		this.regdate = regdate;
+	}
 	public QADTO() {
 		super();
 	}
-	public QADTO(int num, String userid, String subject, String content, int readcount, String regdate) {
-		super();
-		this.num = num;
-		this.userid = userid;
-		this.subject = subject;
-		this.content = content;
-		this.readcount = readcount;
-		this.regdate = regdate;
+	public int getQnum() {
+		return qnum;
 	}
-	public int getNum() {
-		return num;
+	public void setQnum(int qnum) {
+		this.qnum = qnum;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public String getQchoose() {
+		return qchoose;
+	}
+	public void setQchoose(String qchoose) {
+		this.qchoose = qchoose;
 	}
 	public String getUserid() {
 		return userid;
@@ -31,23 +37,17 @@ public class QADTO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getSubject() {
-		return subject;
+	public String getQsubject() {
+		return qsubject;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setQsubject(String qsubject) {
+		this.qsubject = qsubject;
 	}
-	public String getContent() {
-		return content;
+	public String getQcontent() {
+		return qcontent;
 	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public int getReadcount() {
-		return readcount;
-	}
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
 	}
 	public String getRegdate() {
 		return regdate;
@@ -57,9 +57,10 @@ public class QADTO {
 	}
 	@Override
 	public String toString() {
-		return "QADTO [num=" + num + ", userid=" + userid + ", subject=" + subject + ", content=" + content
-				+ ", readcount=" + readcount + ", regdate=" + regdate + "]";
+		return "QADTO [qnum=" + qnum + ", qchoose=" + qchoose + ", userid=" + userid + ", qsubject=" + qsubject
+				+ ", qcontent=" + qcontent + ", regdate=" + regdate + "]";
 	}
+	
 	
 	
 	
