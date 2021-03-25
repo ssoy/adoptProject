@@ -21,59 +21,52 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public BoardDTO selectOne(int bnum) throws Exception {
-		return session.selectOne("org.spring.board.BoardMapper.selectOne", bnum);
-	}
-
-	@Override
-	public void insert(BoardDTO bdto) throws Exception {
-		session.insert("org.spring.board.BoardMapper.insert", bdto);
-	}
-
-	@Override
-	public void update(BoardDTO bdto) throws Exception {
-		session.update("org.spring.board.BoardMapper.update", bdto);
-	}
-
-	@Override
-	public void delete(int bnum) throws Exception {
-		session.delete("org.spring.board.BoardMapper.delete",bnum);
-		
-	}
-
-	@Override
-	public void updateReadCount(int bnum) throws Exception {
-		session.update("org.spring.board.BoardMapper.updateReadCount",bnum);
-	}
-
-	@Override
-	public void updateLikeCnt(int bnum) throws Exception {
-		session.update("org.spring.board.BoardMapper.updateLikeCnt",bnum);
-		
-	}
-
-	@Override
-	public void updateDisLikeCnt(int bnum) throws Exception {
-		session.update("org.spring.board.BoardMapper.updateDisLikeCnt",bnum);
-		
-	}
-
-	@Override
-	public void updateLikeCntMinus(int bnum) throws Exception {
-		session.update("org.spring.board.BoardMapper.updateLikeCntMinus",bnum);
-		
-	}
-
-	@Override
-	public void updateDisLikeCntMinus(int bnum) throws Exception {
-		session.update("org.spring.board.BoardMapper.updateDisLikeCntMinus",bnum);
-		
-	}
-
-	@Override
 	public int selectTotCnt(PageDTO pdto) {
-		return session.selectOne("org.spring.board.BoardMapper.selectTotCnt", pdto);
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+	/*
+	 * @Override public BoardDTO selectOne(int bnum) throws Exception { return
+	 * session.selectOne("org.spring.board.BoardMapper.selectOne", bnum); }
+	 * 
+	 * @Override public void insert(BoardDTO bdto) throws Exception {
+	 * session.insert("org.spring.board.BoardMapper.insert", bdto); }
+	 * 
+	 * @Override public void update(BoardDTO bdto) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.update", bdto); }
+	 * 
+	 * @Override public void delete(int bnum) throws Exception {
+	 * session.delete("org.spring.board.BoardMapper.delete",bnum);
+	 * 
+	 * }
+	 * 
+	 * @Override public void updateReadCount(int bnum) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.updateReadCount",bnum); }
+	 * 
+	 * @Override public void updateLikeCnt(int bnum) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.updateLikeCnt",bnum);
+	 * 
+	 * }
+	 * 
+	 * @Override public void updateDisLikeCnt(int bnum) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.updateDisLikeCnt",bnum);
+	 * 
+	 * }
+	 * 
+	 * @Override public void updateLikeCntMinus(int bnum) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.updateLikeCntMinus",bnum);
+	 * 
+	 * }
+	 * 
+	 * @Override public void updateDisLikeCntMinus(int bnum) throws Exception {
+	 * session.update("org.spring.board.BoardMapper.updateDisLikeCntMinus",bnum);
+	 * 
+	 * }
+	 * 
+	 * @Override public int selectTotCnt(PageDTO pdto) { return
+	 * session.selectOne("org.spring.board.BoardMapper.selectTotCnt", pdto); }
+	 */
 	
 	
 	

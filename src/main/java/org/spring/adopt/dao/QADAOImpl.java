@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.spring.adopt.dto.PageDTO;
 import org.spring.adopt.dto.QADTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

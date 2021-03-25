@@ -6,111 +6,108 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.adopt.dto.MemberDTO;
-import org.spring.adopt.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import org.spring.adopt.dto.MemberDTO;
+import org.spring.adopt.service.MemberService;
+
+//회원관리 컨트롤러
 @Controller
 @RequestMapping("member")
 public class MemberController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private MemberService mservice;
+	MemberService service;
 	
+	//회원가입폼으로 이동
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "member/join";
+	}
 	
-	/*
-	 * //가입폼으로
-	 * 
-	 * @RequestMapping(value = "add", method = RequestMethod.GET) public String
-	 * add(HttpSession session, Model model) throws Exception { //네이버 간편가입 url 얻기
-	 * Map<String, String> resultMap = nservice.getApiUrl(); //클라이언트 인증값 세션에 저장
-	 * session.setAttribute("state", resultMap.get("state"));
-	 * model.addAttribute("apiURL", resultMap.get("apiURL") );
-	 * 
-	 * return "member/add"; }
-	 */
-	
-	//가입
-	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(MemberDTO mdto, RedirectAttributes rattr, Model model, HttpSession session) throws Exception {
+	//회원가입
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(MemberDTO mdto, Model model, RedirectAttributes rattr) {
 		logger.info(mdto.toString());
-		
-		Map<String, Object> resultMap = mservice.insert(mdto);
+		Map<String,Object>  resultMap = service.insert(mdto);
+		//반환값을 이용해서 메시지 view에 출력
 		logger.info(resultMap.toString());
-		
-		//인증키를 세션에 넣기
-		//key:userid, value:authKey
-		session.setAttribute(mdto.getUserid(), resultMap.get("authKey"));
-		session.setMaxInactiveInterval(30*60); //30분
 		
 		//가입실패시(-1) join으로 이동, 성공시(0) main으로 이동
 		if ((int)resultMap.get("result")==0){
 			//redirect 메시지 보내기
 			rattr.addFlashAttribute("msg",resultMap.get("msg"));
-			return "redirect:/main";
+			return "redirect:/"; //절대경로
 		}else {
 			model.addAttribute("msg",resultMap.get("msg"));
-			return "add";
+			return "member/join";
 		}
-
 	}
 	
-	//이메일에서 인증 클릭했을때
-	@RequestMapping("signUpConfirm")
-	 public String signUpConfirm(@RequestParam Map<String, String> map, HttpSession session, RedirectAttributes rattr) throws Exception{
-	    //userid, authKey 가 일치할경우 emailauth 업데이트
-		logger.info(map.toString());
-		//섹션:1)hong:200201 
-		//     2)java:200202 
-		String sessionAuthKey = (String) session.getAttribute(map.get("userid"));
-		logger.info(sessionAuthKey); //세션에 저장된 authKey
-		
-		if (sessionAuthKey==null) { //인증세션이 종료되면 key사라짐
-			logger.info("세션 미존재");
-			return "member/add";
-		}
-		
-		if (sessionAuthKey.equals(map.get("authKey"))){
-			logger.info("메일인증성공");
-			//member=>emailauth 수정
-			mservice.emailauthUpdate(map.get("userid"));
-			rattr.addAttribute("auth", 1);
-			rattr.addFlashAttribute("msg", "인증이 완료 되었습니다");
-		}else {
-			rattr.addAttribute("auth", 1);
-			rattr.addFlashAttribute("msg", "인증키가 일치하지 않습니다.");
-		}
-		//redirect는 주소 변경
-		//url매핑정보
-	    return "redirect:/main";
-	}
-	
-	//아이디 중복체크
-	@ResponseBody
-	@RequestMapping(value = "idCheck", method = RequestMethod.POST)
-	public Map<String, String> idCheck(String userid) throws Exception {
+	//내정보폼으로 이동
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String info(HttpSession session, Model model) {
+		String userid = (String) session.getAttribute("userid");
 		logger.info(userid);
-		Map<String, String> resultMap = mservice.idCheck(userid); 
-		logger.info(resultMap.toString());
-		//jackson-databind : map이나 dto를 json형태로 변환
-		return resultMap;
+		MemberDTO mdto = service.selectOne(userid);
+		logger.info(mdto.toString());
+		model.addAttribute("mdto", mdto);
+		return "member/info";
 	}
 	
-	//주소팝업창
-	@RequestMapping(value = "jusoPopup")
+	//수정폼으로 이동
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modify(HttpSession session, Model model) {
+		String userid = (String) session.getAttribute("userid");
+		MemberDTO mdto = service.selectOne(userid);
+		logger.info(mdto.toString());
+		model.addAttribute("mdto", mdto);
+		return "member/modify";
+	}
+	
+	//회원수정
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modify(@ModelAttribute("mdto") MemberDTO mdto, Model model, RedirectAttributes rattr) {
+		logger.info(mdto.toString());
+		Map<String,Object> resultMap = service.update(mdto);
+		//수정실패시(-1) modify으로 이동, 성공시(0) info으로 이동
+		if ((int)resultMap.get("result")==0) {
+			rattr.addFlashAttribute("msg",resultMap.get("msg"));
+			return "redirect:info"; //상대경로
+		}else {
+			model.addAttribute("msg",resultMap.get("msg"));
+			return "member/modify";
+		}
+		
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(HttpSession session, Model model, RedirectAttributes rattr) {
+		String userid = (String) session.getAttribute("userid");
+		Map<String,Object> resultMap = service.delete(userid);
+		session.invalidate(); //세션의 모든정보 소멸
+		rattr.addFlashAttribute("msg",resultMap.get("msg"));
+		return "redirect:/"; 
+	}
+	
+	//주소 팝업창 띄우기
+	@RequestMapping(value = "/jusoPopup")
 	public String jusoPopup() {
+		
 		return "member/jusoPopup";
 	}
 	
-
+	
+	
 	
 	
 	

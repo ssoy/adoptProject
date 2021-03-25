@@ -29,7 +29,8 @@
 		    map: map
 		});
 		
-		
 	</script>
+	
+	<%@include file="footer.jsp" %>
 </body>
 </html>

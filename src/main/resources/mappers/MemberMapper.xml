@@ -2,21 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.spring.board.MemberMapper">
-
-	<select id="selectOne" resultType="MemberDTO">
-		select * from member where userid=#{userid}
-	</select>
-	
+<mapper namespace="org.spring.adopt.MemberMapper">
 	<insert id="insert">
-		insert into member(userid,passwd,email,zip,addr1,addr2,filename)
+		insert into member(userid,passwd,email,zip,addr1,addr2,filename) 
 		values(#{userid},#{passwd},#{email},#{zip},#{addr1},#{addr2},#{filename})
 	</insert>
 	
-	<!-- emailauth를 1로 update -->
-	<update id="emailauthUpdate">
+	<select id="selectOne" resultType="MemberDTO">
+		select * from member where userid = #{userid}
+	</select>
+	
+	<update id="update">
 		update member
-		set emailauth = '1'
+		set passwd = #{passwd},
+			email = #{email},
+			zip = #{zip},
+			addr1 = #{addr1},
+			addr2 = #{addr2},
+			filename = #{filename}
 		where userid=#{userid}
 	</update>
+	
+	<delete id="delete">
+		delete from member where userid = #{userid}
+	</delete>
+	
 </mapper>

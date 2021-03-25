@@ -1,9 +1,10 @@
 package org.spring.adopt.dao;
 
 import org.apache.ibatis.session.SqlSession;
-import org.spring.adopt.dto.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import org.spring.adopt.dto.MemberDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -12,30 +13,23 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSession session;
 	
 	@Override
-	public MemberDTO selectOne(String userid) {
-		return session.selectOne("org.spring.board.MemberMapper.selectOne", userid);
-	}
-
-	@Override
 	public int insert(MemberDTO mdto) {
-		return session.insert("org.spring.board.MemberMapper.insert", mdto);
+		return session.insert("org.spring.adopt.MemberMapper.insert", mdto);
 	}
 
 	@Override
-	public void emailauthUpdate(String userid) {
-		session.update("org.spring.board.MemberMapper.emailauthUpdate", userid);
-		
-	}
-
-	// 네이버 간편 가입
-	@Override
-	public int insertNaver(String email) {
-		return session.insert("org.spring.board.MemberMapper.insertNaver", email);
+	public MemberDTO selectOne(String userid) {
+		return session.selectOne("org.spring.adopt.MemberMapper.selectOne", userid);
 	}
 
 	@Override
-	public MemberDTO selectOneNaver(String email) {
-		return session.selectOne("org.spring.board.MemberMapper.selectOneNaver", email);
+	public int update(MemberDTO mdto) {
+		return session.update("org.spring.adopt.MemberMapper.update", mdto);
 	}
-	
+
+	@Override
+	public void delete(String userid) {
+		session.delete("org.spring.adopt.MemberMapper.delete", userid);
+	}
+
 }

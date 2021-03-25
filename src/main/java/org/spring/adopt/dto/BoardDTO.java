@@ -87,13 +87,10 @@ public class BoardDTO {
 	}
 	@Override
 	public String toString() {
-		
 		return "BoardDTO [bnum=" + bnum + ", userid=" + userid + ", subject=" + subject + ", content=" + content
 				+ ", readcount=" + readcount + ", likecnt=" + likecnt + ", dislikecnt=" + dislikecnt + ", ip=" + ip
 				+ ", regdate=" + regdate + ", modifydate=" + modifydate + "]";
 	}
-	
-	
 	
 	
 }

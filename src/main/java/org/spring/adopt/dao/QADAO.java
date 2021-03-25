@@ -2,7 +2,7 @@ package org.spring.adopt.dao;
 
 import java.util.List;
 
-import org.spring.adopt.dto.PageDTO;
+
 import org.spring.adopt.dto.QADTO;
 
 

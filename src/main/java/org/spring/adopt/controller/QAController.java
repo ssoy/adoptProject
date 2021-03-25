@@ -88,7 +88,7 @@ public class QAController {
 	public String QAupdate(QADTO qadto, Model model, RedirectAttributes rdatt) {
 		logger.info(qadto.toString());
 		service.update(qadto);
-		rdatt.addAttribute("num", qadto.getQnum());
+		rdatt.addAttribute("qnum", qadto.getQnum());
 		rdatt.addFlashAttribute("msg", "수정완료");
 		return "redirect:detail";
 	}	

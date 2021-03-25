@@ -43,12 +43,10 @@ public class LoginServiceImpl implements LoginService{
 			return resultMap;
 		}
 		
-		//이메일 인증 체크
-		if (!mdto.getEmailauth().equals("1")) {
-			resultMap.put("msg", "이메일 인증을 해주세요!");
-			resultMap.put("result", -1);
-			return resultMap;			
-		}
+		/*
+		 * //이메일 인증 체크 if (!mdto.getEmailauth().equals("1")) { resultMap.put("msg",
+		 * "이메일 인증을 해주세요!"); resultMap.put("result", -1); return resultMap; }
+		 */
 		
 		//로그인 성공
 		resultMap.put("msg", "로그인 성공");

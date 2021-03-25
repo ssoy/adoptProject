@@ -9,6 +9,15 @@
 <title>DOGS</title>
 <script type="text/javascript">
 	$(function(){
+		if ('${sessionScope.userid}' ==''){
+			$('#aLogin').show();
+			$('#aJoin').show();
+			$('#aLogout').hide();
+		}else{
+			$('#aLogin').hide();
+			$('#aJoin').hide();
+			$('#aLogout').show();			
+		}
 		//홈
 		$('#DogsHome').on('click', function(e) {
 			$(this).attr('href', '${path}/');
@@ -25,10 +34,19 @@
 		$('#aQA').on('click', function(e) {
 			$(this).attr('href', '${path}/QA/list');
 		});
-	/* 	//회사위치
-		$('#aDog').on('click', function(e) {
-			$(this).attr('href', '${path}/info');
-		}); */
+	 	//로그인
+		$('#aLogin').on('click', function(e) {
+			$(this).attr('href', '${path}/member/login');
+		});
+	 	
+		//로그아웃
+		$('#aLogout').on('click', function(e) {
+			e.preventDefault(); //객체의 기본기능을 소멸 
+			var result = confirm('로그아웃 하시겠습니까?');
+			if (result){
+				$(location).attr('href', '${path}/member/logout');
+			}
+		});
 	});
 </script>
 </head>
@@ -47,11 +65,16 @@
 					</ul>
 				</nav>
 				<div class="util">
-					<a href="javascript:;">로그인</a>
-					<a href="javascript:;">회원가입</a>
+					<a href="#" data-toggle="modal" data-target="#loginModal" id="aLogin">로그인</a>
+					<a href="${path}/member/join" id="aJoin">회원가입</a>
+					
+					<a href="${path}/member/info">${sessionScope.userid}</a>
+					<a href="" id="aLogout">로그아웃</a>
 				</div>
 			</div>
 		</header>
 	</div>
+	
+	  
 </body>
 </html>
